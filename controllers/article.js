@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const article = require("../models/article");
 const sequelize = new Sequelize(
   "mysql://root:qwerty@localhost:3306/yoga_sequelize",
 );
@@ -16,4 +17,19 @@ const getAllArticles = (req, res) => {
     });
 };
 
-module.exports = { getAllArticles };
+const getArticleBySlug = (req, res) => {
+  Article.findOne({
+    where: {
+      slug: req.params.slug,
+    },
+  })
+    .then((article) => {
+      console.log(article);
+      return res.status(200).json({ article });
+    })
+    .catch((error) => {
+      return res.status(500).send(error.message);
+    });
+};
+
+module.exports = { getAllArticles, getArticleBySlug };
