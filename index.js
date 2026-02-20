@@ -22,6 +22,9 @@ const articleRouter = require("./routes/article");
 app.use("/", articleRouter);
 app.use("/article", articleRouter);
 
+const authorRouter = require("./routes/author");
+app.use("/", authorRouter);
+
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
 });

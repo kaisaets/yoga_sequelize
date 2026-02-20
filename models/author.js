@@ -9,8 +9,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.Article, {
+        foreignKey: "author_id",
+        as: "Articles",
+      });
     }
   }
+
   Author.init(
     {
       id: {
@@ -27,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Author",
-      timestamps: true
+      timestamps: true,
     },
   );
   return Author;
